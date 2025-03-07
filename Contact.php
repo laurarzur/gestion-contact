@@ -2,12 +2,12 @@
 
 class Contact {
 
-    private $id;
-    private $name; 
-    private $email; 
-    private $phoneNumber;
+    private int $id;
+    private string $name; 
+    private string $email; 
+    private string $phoneNumber;
 
-    public function __construct($id, $name, $email, $phoneNumber) 
+    public function __construct(int $id, string $name, string $email, string $phoneNumber) 
     {
         $this->id = $id;
         $this->name = $name;
@@ -15,7 +15,7 @@ class Contact {
         $this->phoneNumber = $phoneNumber;
     }
 
-    public function setId($id) 
+    public function setId(int $id) : void
     {
         $this->id = $id;
     }
@@ -25,7 +25,7 @@ class Contact {
         return $this->id;
     }
 
-    public function setName($name) 
+    public function setName(string $name) : void
     {
         $this->name = $name;
     }
@@ -35,7 +35,7 @@ class Contact {
         return $this->name;
     }
 
-    public function setEmail($email) 
+    public function setEmail(string $email) : void
     {
         $this->email = $email;
     }
@@ -45,7 +45,7 @@ class Contact {
         return $this->email;
     }
 
-    public function setPhoneNumber($phoneNumber) 
+    public function setPhoneNumber(string $phoneNumber) 
     {
         $this->phoneNumber = $phoneNumber;
     }
@@ -53,5 +53,16 @@ class Contact {
     public function getPhoneNumber() : ?string 
     {
         return $this->phoneNumber;
+    } 
+
+    public function toString() : string
+    {
+        return $this->id . ", " . $this->name . ", " . $this->email . ", " . $this->phoneNumber . "\n";
+    }
+
+    public static function fromDatabaseRow(array $array): Contact
+    {
+        $contact = new Contact($array['id'], $array['name'], $array['email'], $array['phone_number']);
+        return $contact;
     }
 }
