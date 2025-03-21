@@ -36,5 +36,11 @@ class Command {
     {
         $contact = $this->manager->create($name, $email, $phoneNumber); 
         echo "Nouveau contact : " . $contact->toString();
+    } 
+
+    public function delete(int $id) : void
+    {
+        $this->manager->delete($id); 
+        echo "Contact " . $id . " supprimé \n";
     }
 }

@@ -60,5 +60,15 @@ class ContactManager {
 
         $contact = $this->findById($id);
         return $contact;
+    } 
+
+    /**
+     * Supprime un contact de la base de données à partir de son id
+     */
+    public function delete(int $id) : void
+    {
+        $query = $this->pdo->prepare("DELETE FROM contact WHERE id = :id;"); 
+        $query->bindParam(":id", $id, PDO::PARAM_INT); 
+        $query->execute();
     }
 }
