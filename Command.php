@@ -31,4 +31,10 @@ class Command {
         }
         echo $contact->toString();
     }
+
+    public function create(string $name, string $email, string $phoneNumber) : void
+    {
+        $contact = $this->manager->create($name, $email, $phoneNumber); 
+        echo "Nouveau contact : " . $contact->toString();
+    }
 }

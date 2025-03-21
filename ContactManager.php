@@ -11,7 +11,7 @@ class ContactManager {
     {
         $this->pdo = DBConnect::getPDO();
     }
-    
+
     /**
      * Renvoie la liste des contacts
      */
@@ -42,6 +42,23 @@ class ContactManager {
         }
 
         $contact = Contact::fromDatabaseRow($contact);
+        return $contact;
+    } 
+
+    /**
+     * Enregistre un contact dans la base de données et le renvoie
+     */
+    public function create(string $name, string $email, string $phoneNumber) : Contact
+    {
+        $query = $this->pdo->prepare("INSERT INTO contact (name, email, phone_number) VALUES (:name, :email, :phoneNumber);"); 
+        $query->bindParam(":name", $name, PDO::PARAM_STR); 
+        $query->bindParam(":email", $email, PDO::PARAM_STR); 
+        $query->bindParam(":phoneNumber", $phoneNumber, PDO::PARAM_STR); 
+        $query->execute(); 
+
+        $id = $this->pdo->lastInsertId();
+
+        $contact = $this->findById($id);
         return $contact;
     }
 }
