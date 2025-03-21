@@ -70,5 +70,21 @@ class ContactManager {
         $query = $this->pdo->prepare("DELETE FROM contact WHERE id = :id;"); 
         $query->bindParam(":id", $id, PDO::PARAM_INT); 
         $query->execute();
+    } 
+
+    /**
+     * Modifie un contact dans la base de données
+     */
+    public function modify(int $id, string $name, string $email, string $phoneNumber) : Contact 
+    {
+        $query = $this->pdo->prepare("UPDATE contact SET name = :name, email = :email, phone_number = :phoneNumber WHERE id = :id;"); 
+        $query->bindParam(":id", $id, PDO::PARAM_INT);
+        $query->bindParam(":name", $name, PDO::PARAM_STR); 
+        $query->bindParam(":email", $email, PDO::PARAM_STR); 
+        $query->bindParam(":phoneNumber", $phoneNumber, PDO::PARAM_STR); 
+        $query->execute(); 
+
+        $contact = $this->findById($id);
+        return $contact;
     }
 }
