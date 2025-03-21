@@ -20,4 +20,15 @@ class Command {
             echo $contact->toString();
         }
     }
+
+    public function detail(int $id) : void
+    {
+        $contact = $this->manager->findById($id);
+
+        if (!$contact) {
+            echo "Ce contact n'existe pas \n";
+            return;
+        }
+        echo $contact->toString();
+    }
 }

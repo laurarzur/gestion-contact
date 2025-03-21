@@ -60,11 +60,17 @@ class Contact {
         return $this->phoneNumber;
     } 
 
+    /**
+     * Renvoie un contact sous forme de chaîne de caractères
+     */
     public function toString() : string
     {
         return $this->id . ", " . $this->name . ", " . $this->email . ", " . $this->phoneNumber . "\n";
     }
 
+    /**
+     * Renvoie un objet Contact à partir d'une ligne de la base de données
+     */
     public static function fromDatabaseRow(array $array): Contact
     {
         $contact = new Contact($array['id'], $array['name'], $array['email'], $array['phone_number']);

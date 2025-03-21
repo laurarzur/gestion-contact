@@ -5,19 +5,43 @@ require_once('Contact.php');
 
 class ContactManager {
 
+    private $pdo; 
+
+    public function __construct()
+    {
+        $this->pdo = DBConnect::getPDO();
+    }
+    
     /**
      * Renvoie la liste des contacts
      */
     public function findAll() : array 
     {
-        $pdo = DBConnect::getPDO();
-        $results = $pdo->query("SELECT * from contact"); 
+        $query = $this->pdo->query("SELECT * from contact;"); 
         $contacts = [];
 
-        while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
             $contacts[] = Contact::fromDatabaseRow($row);
         }
         
         return $contacts;
+    }
+
+    /**
+     * Renvoie un contact à partir de son id
+     */
+    public function findById(int $id) : ?Contact
+    {
+        $query = $this->pdo->prepare("SELECT * FROM contact WHERE id = :id;");
+        $query->bindParam(":id", $id, PDO::PARAM_INT); 
+        $query->execute(); 
+        $contact = $query->fetch();
+
+        if (!$contact) {
+            return null;
+        }
+
+        $contact = Contact::fromDatabaseRow($contact);
+        return $contact;
     }
 }
