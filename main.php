@@ -1,18 +1,13 @@
 <?php 
 
-require_once('ContactManager.php');
+require_once('Command.php');
 
-$manager = new ContactManager();
+$command = new Command();
 
 while (true) {
     $line = readline("Entrez votre commande : ");
     echo "Vous avez saisi : $line\n";
     if ($line === "list") {
-        echo "Liste des contacts : \n";
-        echo "id, nom, email, telephone\n";
-        $contacts = $manager->findAll();
-        foreach($contacts as $contact) {
-            echo $contact->toString();
-        }
+        $command->list();
     }
 }

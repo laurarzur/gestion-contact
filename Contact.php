@@ -2,17 +2,22 @@
 
 class Contact {
 
-    private int $id;
-    private string $name; 
-    private string $email; 
-    private string $phoneNumber;
+    // private int $id;
+    // private string $name; 
+    // private string $email; 
+    // private string $phoneNumber;
 
-    public function __construct(int $id, string $name, string $email, string $phoneNumber) 
+    // public function __construct(?int $id = null, ?string $name, ?string $email, ?string $phoneNumber) 
+    // {
+    //     $this->id = $id;
+    //     $this->name = $name;
+    //     $this->email = $email;
+    //     $this->phoneNumber = $phoneNumber;
+    // }
+
+
+    public function __construct(protected int $id, protected string $name, protected string $email, protected string $phoneNumber) 
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->email = $email;
-        $this->phoneNumber = $phoneNumber;
     }
 
     public function setId(int $id) : void
