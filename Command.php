@@ -29,6 +29,9 @@ class Command {
             echo "Ce contact n'existe pas \n";
             return;
         }
+
+        echo "Détail du contact " . $id . " : \n";
+        echo "id, nom, email, telephone\n";
         echo $contact->toString();
     }
 
